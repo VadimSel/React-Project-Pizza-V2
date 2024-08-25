@@ -35,11 +35,11 @@ function App() {
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
             {isLoading
-            ? [...new Array(6).map((_, index) => <Skeleton key={index}/>)]
+            ? [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
             : items.map((obj) => <PizzaBlock key={obj.id} {...obj}/>)}
             {/* {
               items.map(obj => (
-                <PizzaBlock
+                <Skeleton
                   key={obj.id}
                   title={obj.title}
                   price={obj.price}
