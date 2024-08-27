@@ -5,12 +5,13 @@
   text-align: center;
   margin-bottom: 65px;
 
-  &:not(:nth-of-type(4n)) {
-    margin-right: 35px;
+  &_wrapper {
+    display: flex;
   }
 
   &__image {
     width: 260px;
+    justify-content: center;
   }
 
   &__title {
