@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 
 import { Header } from "./components/Header";
@@ -22,6 +22,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/cart" element={<Cart />} />
+                        <Route path="/react-pizza-v2" element={<Navigate to={"/"} />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </div>

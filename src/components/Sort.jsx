@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sortType } from "../redux/slices/filterSlice";
 
@@ -14,6 +14,7 @@ const list = [
 export function Sort() {
     const dispatch = useDispatch()
     const sort = useSelector(state => state.filter.sort)
+    const sortRef = useRef()
 
     const [open, setOpen] = useState(false);
     // const list = ["популярности", "цене", "алфавиту"];
@@ -22,9 +23,24 @@ export function Sort() {
         dispatch(sortType(obj))
         setOpen(false);
     };
+    
+    // ----------- Закрытие попапа более сложным способом -----------
+    // useEffect(() => {
+    //     const handleClickOutside = (event) => {
+    //         if (!event.composedPath().includes(sortRef.current)) {
+    //             setOpen(false)
+    //             console.log("click")
+    //         }
+    //     }
+
+    //     document.body.addEventListener('click', handleClickOutside)
+    //     return () => {
+    //         document.body.removeEventListener('click', handleClickOutside)
+    //     }
+    // }, [])
 
     return (
-        <div className="sort">
+        <div tabIndex="0" onBlur={() => setOpen(false)} ref={sortRef} className="sort">
             <div className="sort__label">
                 <svg
                     width="10"
