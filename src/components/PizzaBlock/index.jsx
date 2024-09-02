@@ -20,7 +20,7 @@ export function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
             price,
             imageUrl,
             type: typeNames[activeType],
-            size: activeSize,
+            size: activeSize[activeSize],
         };
         dispatch(addItem(item));
     };
