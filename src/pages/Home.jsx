@@ -13,8 +13,6 @@ import axios from "axios";
 const Home = () => {
     const dispatch = useDispatch();
     const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
-    // const sortType = useSelector((state) => state.filter.sort.sortProperty);
-    // const sortType = sort.sortProperty
 
     const { searchValue } = useContext(SearchContext);
     const [items, setItems] = useState([]);
@@ -25,10 +23,10 @@ const Home = () => {
     };
 
     const onChangePage = (number) => {
-        dispatch(setCurrentPage(number))
-    }
+        dispatch(setCurrentPage(number));
+    };
 
-    useEffect(() => {
+    const fetchPizzas = () => {
         setIsLoading(true);
 
         const order = sort.sortProperty.includes("-") ? "asc" : "desc";
@@ -45,10 +43,15 @@ const Home = () => {
                 setIsLoading(false);
             })
             .catch((error) => {
-                setItems([])
-                setIsLoading(false)
-            })
+                setItems([]);
+                setIsLoading(false);
+            });
         window.scrollTo(0, 0);
+    };
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+        fetchPizzas()
     }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
     const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
