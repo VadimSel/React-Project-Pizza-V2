@@ -13,6 +13,8 @@ import axios from "axios";
 const Home = () => {
     const dispatch = useDispatch();
     const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
+    // const sortType = useSelector((state) => state.filter.sort.sortProperty);
+    // const sortType = sort.sortProperty
 
     const { searchValue } = useContext(SearchContext);
     const [items, setItems] = useState([]);
