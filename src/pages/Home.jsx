@@ -14,7 +14,6 @@ const Home = () => {
     const dispatch = useDispatch();
     const { status, items } = useSelector((state) => state.pizza);
     const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
-    const { items, status } = useSelector((state) => state.pizza);
 
     const { searchValue } = useContext(SearchContext);
     // const [items, setItems] = useState([]);
