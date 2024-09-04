@@ -7,6 +7,11 @@ type SortItem = {
     sortProperty: string
 }
 
+// Типизация для сложного способа закрытия попапа при клике вне попапа
+type PopupClick = MouseEvent & {
+    path: Node[]
+}
+
 export const sortList: SortItem[] = [
     { name: "популярности (DESC)", sortProperty: "rating" },
     { name: "популярности (ASC)", sortProperty: "-rating" },
@@ -28,11 +33,12 @@ export function Sort() {
         dispatch(sortType(obj))
         setOpen(false);
     };
-    
+
     // ----------- Закрытие попапа более сложным способом -----------
     // useEffect(() => {
-    //     const handleClickOutside = (event) => {
-    //         if (!event.composedPath().includes(sortRef.current)) {
+    //     const handleClickOutside = (event: MouseEvent) => {
+    //      const _event = event as PopupClick
+    //         if (sortRef.current && !_event.composedPath().includes(sortRef.current)) {
     //             setOpen(false)
     //             console.log("click")
     //         }

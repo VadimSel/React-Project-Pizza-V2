@@ -2,11 +2,12 @@ import React, { useState } from "react";
 
 type CategoriesProps = {
     value: number
-    onChangeCategory: any
+    onChangeCategory: (idx: number) => void
 }
 
+const categories = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
+
 export const Categories: React.FC<CategoriesProps> = ({ value, onChangeCategory }) => {
-    const categories = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
 
     return (
         <div className="categories">
