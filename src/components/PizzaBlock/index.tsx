@@ -6,13 +6,23 @@ import { Link } from "react-router-dom";
 
 const typeNames = ["тонкое", "традиционное"];
 
-export function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
+type PizzaBlockProps = {
+    id: string,
+    title: string,
+    price: number,
+    imageUrl: string,
+    sizes: number[],
+    types: number[],
+    rating: number
+}
+
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) => {
     const dispatch = useDispatch();
     const cartItem = useSelector(selectCartItemById(id));
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
 
-    const addedCount = cartItem ? cartItem.count : "0";
+    const addedCount = cartItem ? cartItem.count : 0;
 
     const onClickAdd = () => {
         const item = {
@@ -21,7 +31,7 @@ export function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
             price,
             imageUrl,
             type: typeNames[activeType],
-            size: activeSize[activeSize],
+            size: sizes[activeSize],
         };
         dispatch(addItem(item));
     };

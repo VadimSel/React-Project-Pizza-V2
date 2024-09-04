@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 
-import { SearchContext } from "../App";
 import { Categories } from "../components/Categories";
 import Pagination from "../components/Pagination";
 import { PizzaBlock } from "../components/PizzaBlock";
@@ -11,17 +10,17 @@ import { selectFilter, setCategoryId, setCurrentPage } from "../redux/slices/fil
 import { fetchPizzas, selectPizzaData, setItems } from "../redux/slices/pizzaSlice";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home: React.FC = () => {
     const dispatch = useDispatch();
     const { status, items } = useSelector(selectPizzaData);
     const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
 
-    const onChangeCategory = (id) => {
-        dispatch(setCategoryId(id));
+    const onChangeCategory = (idx: number) => {
+        dispatch(setCategoryId(idx));
     };
 
-    const onChangePage = (number) => {
-        dispatch(setCurrentPage(number));
+    const onChangePage = (page: number) => {
+        dispatch(setCurrentPage(page));
     };
 
     const getPizzas = async () => {
@@ -45,6 +44,7 @@ const Home = () => {
         //     });
 
         dispatch(
+            // @ts-ignore
             fetchPizzas({
                 order,
                 sortBy,
@@ -62,7 +62,7 @@ const Home = () => {
         getPizzas();
     }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
-    const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+    const pizzas = items.map((obj: any) => <PizzaBlock key={obj.id} {...obj} />);
     // const pizzas = Array.isArray(items)
     //     ? items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)
     //     : [];
