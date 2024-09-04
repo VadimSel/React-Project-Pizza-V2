@@ -9,6 +9,7 @@ import { Sort } from "../components/Sort";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFilter, setCategoryId, setCurrentPage } from "../redux/slices/filterSlice";
 import { fetchPizzas, selectPizzaData, setItems } from "../redux/slices/pizzaSlice";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     const dispatch = useDispatch();
