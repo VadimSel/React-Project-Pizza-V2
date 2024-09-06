@@ -4,14 +4,15 @@ import { Categories } from "../components/Categories";
 import Pagination from "../components/Pagination";
 import { PizzaBlock } from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
-import { Sort } from "../components/Sort";
+import { SortPopup } from "../components/Sort";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFilter, setCategoryId, setCurrentPage } from "../redux/slices/filterSlice";
 import { fetchPizzas, selectPizzaData, setItems } from "../redux/slices/pizzaSlice";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../redux/store";
 
 const Home: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const { status, items } = useSelector(selectPizzaData);
     const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
 
@@ -44,13 +45,12 @@ const Home: React.FC = () => {
         //     });
 
         dispatch(
-            // @ts-ignore
             fetchPizzas({
                 order,
                 sortBy,
                 category,
                 search,
-                currentPage,
+                currentPage: String(currentPage),
             })
         );
 
@@ -72,7 +72,7 @@ const Home: React.FC = () => {
         <div className="container">
             <div className="content__top">
                 <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-                <Sort />
+                <SortPopup />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             {status === "error" ? (
