@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectSort, Sort, SortPropertyEnum, sortType } from "../redux/slices/filterSlice";
 
@@ -12,6 +12,10 @@ type PopupClick = MouseEvent & {
     path: Node[]
 }
 
+type SortPopupProps = {
+    value: Sort
+}
+
 export const sortList: SortItem[] = [
     { name: "популярности (DESC)", sortProperty: SortPropertyEnum.RATING_DESC },
     { name: "популярности (ASC)", sortProperty: SortPropertyEnum.RATING_ASC },
@@ -21,9 +25,9 @@ export const sortList: SortItem[] = [
     { name: "алфавиту (ASC)", sortProperty: SortPropertyEnum.PRICE_ASC },
 ];
 
-export function SortPopup() {
+export const SortPopup: React.FC<SortPopupProps> = memo(({ value }) => {
     const dispatch = useDispatch()
-    const sort = useSelector(selectSort)
+    // const sort = useSelector(selectSort)
     const sortRef = useRef<HTMLDivElement>(null)
 
     const [open, setOpen] = useState(false);
@@ -66,7 +70,7 @@ export function SortPopup() {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setOpen(!open)}>{sort.name}</span>
+                <span onClick={() => setOpen(!open)}>{value.name}</span>
             </div>
             {open && (
                 <div className="sort__popup">
@@ -76,7 +80,7 @@ export function SortPopup() {
                                 <li
                                     key={i}
                                     onClick={() => onClickListItem(obj)}
-                                    className={sort.sortProperty === obj.sortProperty ? "active" : ""}
+                                    className={value.sortProperty === obj.sortProperty ? "active" : ""}
                                 >
                                     {obj.name}
                                 </li>
@@ -87,4 +91,4 @@ export function SortPopup() {
             )}
         </div>
     );
-}
+})
