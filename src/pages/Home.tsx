@@ -8,10 +8,12 @@ import { SortPopup } from "../components/Sort";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../redux/store";
-import { selectFilter } from "../redux/filter/selectors";
+// import { selectFilter } from "../redux/filter/selectors";
 import { selectPizzaData } from "../redux/pizza/selectors";
-import { setCategoryId, setCurrentPage } from "../redux/filter/slice";
+// import { setCategoryId, setCurrentPage } from "../redux/filter/slice";
 import { fetchPizzas } from "../redux/pizza/asyncActions";
+import { selectFilter } from "../redux/filter/selectors";
+import { setCategoryId, setCurrentPage } from "../redux/filter/slice";
 
 const Home: React.FC = () => {
     const dispatch = useAppDispatch();
