@@ -1,19 +1,16 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 
+import { useSelector } from "react-redux";
 import { Categories } from "../components/Categories";
 import Pagination from "../components/Pagination";
 import { PizzaBlock } from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import { SortPopup } from "../components/Sort";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { useAppDispatch } from "../redux/store";
-// import { selectFilter } from "../redux/filter/selectors";
-import { selectPizzaData } from "../redux/pizza/selectors";
-// import { setCategoryId, setCurrentPage } from "../redux/filter/slice";
-import { fetchPizzas } from "../redux/pizza/asyncActions";
 import { selectFilter } from "../redux/filter/selectors";
 import { setCategoryId, setCurrentPage } from "../redux/filter/slice";
+import { fetchPizzas } from "../redux/pizza/asyncActions";
+import { selectPizzaData } from "../redux/pizza/selectors";
+import { useAppDispatch } from "../redux/store";
 
 const Home: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -35,19 +32,6 @@ const Home: React.FC = () => {
         const category = categoryId > 0 ? `category=${categoryId}` : "";
         const search = searchValue ? `&search=${searchValue}` : "";
 
-        // await axios
-        //     .get(
-        //         `https://66c9fd0759f4350f064e1891.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-        //     )
-        //     .then((res) => {
-        //         setItems(res.data);
-        //         setIsLoading(false);
-        //     })
-        //     .catch((error) => {
-        //         setItems([]);
-        //         setIsLoading(false);
-        //     });
-
         dispatch(
             fetchPizzas({
                 order,
@@ -62,14 +46,10 @@ const Home: React.FC = () => {
     };
 
     useEffect(() => {
-        // window.scrollTo(0, 0);
         getPizzas();
     }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
     const pizzas = items.map((obj: any) => <PizzaBlock key={obj.id} {...obj} />);
-    // const pizzas = Array.isArray(items)
-    //     ? items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)
-    //     : [];
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
     return (
