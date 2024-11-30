@@ -1,0 +1,28 @@
+.container__fullPizza {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.container__fullPizza-imageContainer {
+  height: 500px;
+  width: 500px;
+}
+
+.container__fullPizzaImage {
+	height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.container__content {
+	display: flex;
+	flex-direction: column;
+	gap: 100px;
+}
+
+.container__titleAndPrice {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
